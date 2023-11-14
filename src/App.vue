@@ -9,6 +9,7 @@ import {
   updateFile,
   deleFile
 } from './hook/useFetch'
+import { decrypt } from './utils/crypto'
 const oUser: any = ref({})
 const oRepo: any = ref([])
 const ogetUser = async () => {
@@ -80,9 +81,23 @@ const odeleFile = async (repoName: string) => {
   }
   deleFile(repoName)
 }
+const input1 = ref('')
+const input2 = ref('')
+const input3 = () => {
+  if (input1.value && input2.value) {
+    let token = decrypt(input1.value, input2.value)
+    localStorage.setItem('token', token)
+  }
+}
 </script>
 
 <template>
+  <div>
+    更新token:
+    <input type="text" v-model="input1" />
+    <input type="text" v-model="input2" />
+    <button @click="input3">更新</button>
+  </div>
   <div style="padding: 50px">
     <input type="checkbox" v-model="isCache" />
     <pre>

@@ -1,7 +1,7 @@
 // https://api.github.com/users/chendj001
 import { ref } from 'vue'
 const headers = {
-  Authorization: 'token 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'
+  Authorization: 'token ' + localStorage.getItem('token')
 }
 export const isCache = ref(false)
 const getCache = () => {
