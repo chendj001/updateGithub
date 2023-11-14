@@ -196,7 +196,7 @@ export const updateFile = async (repo: string, userName: string = user) => {
 export const lookFile = async (repo: string, userName: string = user) => {
   // https://api.github.com/repos/chendj001/update/contents/.github/workflows
   return await fetch(
-    `https://api.github.com/repos/${userName}/${repo}/contents`,
+    `https://api.github.com/repos/${userName}/${repo}/contents/.github/workflows`,
     {
       method: 'GET',
       headers,
@@ -215,13 +215,13 @@ export const deleFile = async (repo: string, userName: string = user) => {
   let prepo = await lookFile(repo, userName)
 
   return await fetch(
-    `https://api.github.com/repos/${userName}/${repo}/contents/.github`,
+    `https://api.github.com/repos/${userName}/${repo}/contents/.github/workflows/ci.yml`,
     {
       method: 'DELETE',
       headers,
       body: JSON.stringify({
         message: '删除action文件',
-        sha: prepo.find((item) => item.name == '.github').sha
+        sha: prepo.find((item) => item.name == 'ci.yml').sha
       }),
       cache: getCache()
     }
