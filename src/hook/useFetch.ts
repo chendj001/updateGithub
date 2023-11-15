@@ -233,3 +233,20 @@ export const deleFile = async (repo: string, userName: string = user) => {
     }
   })
 }
+
+export const createDeployment = async () => {
+  return await fetch(`https://api.github.com/repos/chendj89/v12/actions/workflows/ci.yml/dispatches`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      ref: 'main',
+    }),
+    cache: getCache()
+  }).then((res) => {
+    if (res.status == 201) {
+      return res.json()
+    } else {
+      return undefined
+    }
+  })
+}

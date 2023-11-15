@@ -7,7 +7,8 @@ import {
   isCache,
   deleRepo,
   updateFile,
-  deleFile
+  deleFile,
+  createDeployment
 } from './hook/useFetch'
 import { decrypt } from './utils/crypto'
 const oUser: any = ref({})
@@ -89,6 +90,12 @@ const input3 = () => {
     localStorage.setItem('token', token)
   }
 }
+const ocreateDeployment=()=>{
+  let sure: any = confirm(`是否确定部署`)
+  if(sure){
+    createDeployment()
+  }
+}
 </script>
 
 <template>
@@ -115,6 +122,7 @@ const input3 = () => {
       <button @click="ogetUser">用户信息</button>
       <button @click="ogetRepos">仓库</button>
       <button @click="ocreateRepo">创建新仓库</button>
+      <button @click="ocreateDeployment">部署</button>
     </div>
   </div>
 </template>
